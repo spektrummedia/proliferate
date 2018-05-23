@@ -2,6 +2,8 @@
 
 ## A work in progress serverless email delivery platform
 
+![AWS](_github/proliferate.png "AWS infra")
+
 ## Support
 
 Please [open an issue](https://github.com/spektrummedia/proliferate/issues/new) for support.
