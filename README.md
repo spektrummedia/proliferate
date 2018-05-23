@@ -4,6 +4,8 @@
 
 ![AWS](_github/proliferate.png "AWS infra")
 
+French documentation can be found [here](draft.md).
+
 ## Support
 
 Please [open an issue](https://github.com/spektrummedia/proliferate/issues/new) for support.
