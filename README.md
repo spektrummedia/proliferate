@@ -16,6 +16,15 @@ French documentation can be found [here](draft.md).
 
 ## Documentation
 
+#### Deployment
+For `dev` stage:
+
+`sls deploy`
+
+For `prod` stage:
+
+`sls deploy --stage prod`
+
 #### Creating a new service
 
 ```bash
