@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate", "Proliferate.csproj", "{965C1933-AB58-405D-B547-296D7529CFAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{965C1933-AB58-405D-B547-296D7529CFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{965C1933-AB58-405D-B547-296D7529CFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{965C1933-AB58-405D-B547-296D7529CFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{965C1933-AB58-405D-B547-296D7529CFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A88C702-8475-46BC-A23C-FF2E75A7665D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+service: proliferate
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  runtime: dotnetcore2.0
+  environment: 
+    stage: ${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "*"
+
+package:
+  artifact: bin/release/netcoreapp2.0/deploy-package.zip
+
+functions:
+  validate-email:
+    handler: CsharpHandlers::Proliferate.ValidateEmail::Execute
+    events:
+      - http: GET validate-email
+
+  validate-api-key:
+    handler: CsharpHandlers::Proliferate.ValidateApiKey::Execute
