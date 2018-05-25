@@ -13,6 +13,15 @@ French documentation can be found [here](draft.md).
 [Write Serverless Functions Using AWS Lambda And C#
 ](https://gooroo.io/GoorooThink/Article/17421/Write-Serverless-Functions-Using-AWS-Lambda-And-C/29348)
 
+## Services
+
+#### validate-email
+
+This service is used to validate email.
+
+#### validate-api-key
+
+This service is used to validate API keys. Unallowed API keys will not be able to send email from `proliferate`.
 
 ## Documentation
 
