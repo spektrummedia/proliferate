@@ -19,14 +19,14 @@ package:
 functions:
 
   send-email:
-    handler: CsharpHandlers::Proliferate.SendEmailService::Execute
+    handler: Proliferate::Proliferate.SendEmailService::Execute
     events:
       - http:
           path: send-email
           method: post
 
   validate-email:
-    handler: CsharpHandlers::Proliferate.ValidateEmail::Execute
+    handler: Proliferate::Proliferate.ValidateEmail::Execute
 
   validate-api-key:
-    handler: CsharpHandlers::Proliferate.ValidateApiKey::Execute
+    handler: Proliferate::Proliferate.ValidateApiKey::Execute
