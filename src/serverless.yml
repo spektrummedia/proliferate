@@ -7,17 +7,40 @@ provider:
   runtime: dotnetcore2.0
   environment: 
     stage: ${self:provider.stage}
+    email_table: ${self:service}-${opt:stage, self:provider.stage}-emails
   iamRoleStatements:
     - Effect: Allow
       Action:
         - lambda:InvokeFunction
+        - dynamodb:Query
+        - dynamodb:Scan  
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
       Resource: "*"
+
+resources:
+  Resources:
+    EmailsDynamoDbTable: 
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.email_table}
 
 package:
   artifact: bin/release/netcoreapp2.0/deploy-package.zip
 
 functions:
-
   send-email:
     handler: Proliferate::Proliferate.SendEmail.SendEmailService::Execute
     events:
