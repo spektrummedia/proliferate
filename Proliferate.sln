@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate", "Proliferate.csproj", "{965C1933-AB58-405D-B547-296D7529CFAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate", "src\Proliferate.csproj", "{965C1933-AB58-405D-B547-296D7529CFAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate.Test", "..\test\Proliferate.Test.csproj", "{6D0351FA-B633-4350-BF11-69EB410DC1E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate.Test", "test\Proliferate.Test.csproj", "{6D0351FA-B633-4350-BF11-69EB410DC1E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 using Newtonsoft.Json;
+using Proliferate.SendEmail;
 using Shouldly;
 using Spk.Common.Helpers.Service;
 using Xunit;

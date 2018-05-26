@@ -2,9 +2,8 @@
 using System.Linq;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
-using Proliferate.Validation;
+using Proliferate.SendEmail.Validation;
 using Spk.Common.Helpers.Service;
-using Spk.Common.Helpers.String;
 using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
 
 [assembly: LambdaSerializer(typeof(JsonSerializer))]
@@ -41,6 +40,7 @@ namespace Proliferate.SendEmail
                 {
                     _result.AddError($"{error.Key}: {error.Value}");
                 }
+
                 return new Response(_result);
             }
 
