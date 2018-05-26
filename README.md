@@ -13,8 +13,50 @@ French documentation can be found [here](draft.md).
 [Write Serverless Functions Using AWS Lambda And C#
 ](https://gooroo.io/GoorooThink/Article/17421/Write-Serverless-Functions-Using-AWS-Lambda-And-C/29348)
 
+## Services
+
+### send-email
+
+Input:
+```javascript
+{
+    "api_key": "21e7176c-6051-11e8-9c2d-fa7ae01bbebc",
+    "from": "from@example.com",
+    "to": [
+        "to@example.com"
+    ],
+    "cc": [
+        "cc@example.com"
+    ],
+    "bcc": [
+        "bcc@example.com"
+    ],
+    "subject": "Example",
+    "content": {
+        "text": "This is an email",
+        "html": "<p>This is an email</p>"
+    }
+}
+```
+
+#### validate-email
+
+This service is used to validate email.
+
+#### validate-api-key
+
+This service is used to validate API keys. Unallowed API keys will not be able to send email from `proliferate`.
 
 ## Documentation
+
+#### Deployment
+For `dev` stage:
+
+`sls deploy`
+
+For `prod` stage:
+
+`sls deploy --stage prod`
 
 #### Creating a new service
 

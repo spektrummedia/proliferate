@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate", "Proliferate.csproj", "{965C1933-AB58-405D-B547-296D7529CFAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate", "src\Proliferate.csproj", "{965C1933-AB58-405D-B547-296D7529CFAF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proliferate.Test", "test\Proliferate.Test.csproj", "{6D0351FA-B633-4350-BF11-69EB410DC1E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{053C1FD0-64F4-4DBF-9438-F7DE218E8622}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,10 @@ Global
 		{965C1933-AB58-405D-B547-296D7529CFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{965C1933-AB58-405D-B547-296D7529CFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{965C1933-AB58-405D-B547-296D7529CFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D0351FA-B633-4350-BF11-69EB410DC1E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D0351FA-B633-4350-BF11-69EB410DC1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D0351FA-B633-4350-BF11-69EB410DC1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D0351FA-B633-4350-BF11-69EB410DC1E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

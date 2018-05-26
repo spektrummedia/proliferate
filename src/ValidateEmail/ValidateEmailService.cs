@@ -4,8 +4,6 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.Serialization.Json;
 using Spk.Common.Helpers.Service;
 
-[assembly: LambdaSerializer(typeof(JsonSerializer))]
-
 namespace Proliferate
 {
     public class ValidateEmail : FunctionHandler
@@ -37,16 +35,6 @@ namespace Proliferate
             }
 
             return new Response(result);
-        }
-    }
-
-    public class Request
-    {
-        public string Email { get; set; }
-
-        public Request(string email)
-        {
-            Email = email;
         }
     }
 }

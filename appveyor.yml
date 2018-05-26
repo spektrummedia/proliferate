@@ -1,0 +1,11 @@
+image: Visual Studio 2017
+configuration: Release
+
+branches:
+  only:
+    - master
+    - develop
+
+build_script:
+  - cd src
+  - .\build.cmd
