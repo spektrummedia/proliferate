@@ -9,7 +9,7 @@ using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
 
 [assembly: LambdaSerializer(typeof(JsonSerializer))]
 
-namespace Proliferate
+namespace Proliferate.SendEmail
 {
     public class SendEmailService : FunctionHandler
     {

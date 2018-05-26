@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Proliferate.Validation
+namespace Proliferate.SendEmail.Validation
 {
     public class ToApprover : SendEmailRequestBaseApprover
     {

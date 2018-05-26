@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Proliferate.Validation
+namespace Proliferate.SendEmail.Validation
 {
     public abstract class SendEmailRequestBaseApprover
     {
