@@ -5,31 +5,31 @@ namespace Proliferate
 {
     public class EmailContent
     {
-        public string text { get; set; }
-        public string html { get; set; }
+        public string Text { get; set; }
+        public string Html { get; set; }
     }
 
     public class SendEmailRequest
     {
         [JsonProperty("api_key")]
-        public string api_key { get; set; }
+        public string ApiKey { get; set; }
 
         [JsonProperty("from")]
-        public string from { get; set; }
+        public string From { get; set; }
 
         [JsonProperty("to")]
-        public List<string> to { get; set; }
+        public List<string> To { get; set; }
 
         [JsonProperty("cc")]
-        public List<string> cc { get; set; }
+        public List<string> CC { get; set; }
 
         [JsonProperty("bcc")]
-        public List<string> bcc { get; set; }
+        public List<string> BCC { get; set; }
 
         [JsonProperty("subject")]
-        public string subject { get; set; }
+        public string Subject { get; set; }
 
         [JsonProperty("content")]
-        public EmailContent content { get; set; }
+        public EmailContent Content { get; set; }
     }
 }

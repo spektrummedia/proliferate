@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <AssemblyName>CsharpHandlers</AssemblyName>
-    <PackageId>proliferate</PackageId>
+    <AssemblyName>Proliferate</AssemblyName>
+    <PackageId>Proliferate</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
