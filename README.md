@@ -20,21 +20,21 @@ French documentation can be found [here](draft.md).
 Input:
 ```javascript
 {
-    api_key: "21e7176c-6051-11e8-9c2d-fa7ae01bbebc",
-    from: "from@example.com",
-    to: [
+    "api_key": "21e7176c-6051-11e8-9c2d-fa7ae01bbebc",
+    "from": "from@example.com",
+    "to": [
         "to@example.com"
     ],
-    cc: [
+    "cc": [
         "cc@example.com"
     ],
-    bcc: [
+    "bcc": [
         "bcc@example.com"
     ],
-    subject: "Example",
-    content: {
-        text: "This is an email",
-        html: "<p>This is an email</p>"
+    "subject": "Example",
+    "content": {
+        "text": "This is an email",
+        "html": "<p>This is an email</p>"
     }
 }
 ```
