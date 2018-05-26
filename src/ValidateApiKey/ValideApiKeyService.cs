@@ -1,12 +1,39 @@
-﻿using Amazon.Lambda.Core;
+﻿using System;
+using System.Threading.Tasks;
+using Amazon.Lambda.Core;
+using Spk.Common.Helpers.Service;
 
-namespace Proliferate
+namespace Proliferate.ValidateApiKey
 {
-    public class ValidateApiKey : FunctionHandler
+    public class ValideApiKeyService : FunctionHandler
     {
-        public Response Execute(Request request, ILambdaContext context)
+        private readonly string _buildMarkupFunctionName;
+        private readonly AmazonLambdaHandler _lambdaHandler;
+
+        public ValideApiKeyService()
         {
-            return new Response("ValidateApiKey");
+            _buildMarkupFunctionName = $"proliferate-{Stage}-build-markup";
+            _lambdaHandler = new AmazonLambdaHandler();
+        }
+
+        public async Task<Response> Execute(Request request, ILambdaContext context)
+        {
+            var result = new ServiceResult<object>();
+
+            try
+            {
+                result.SetData(new
+                {
+                    Stage,
+                    FunctionResponse = await _lambdaHandler.TriggerLambdaFunction(_buildMarkupFunctionName)
+                });
+            }
+            catch (Exception exception)
+            {
+                result.AddError(exception.Message);
+            }
+
+            return new Response(result);
         }
     }
 }

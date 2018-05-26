@@ -7,7 +7,7 @@ namespace Proliferate
 {
     public class AmazonLambdaHandler
     {
-        public async Task<string> Bleh(string apiFunctionName)
+        public async Task<string> TriggerLambdaFunction(string apiFunctionName)
         {
             var lambdaResult = string.Empty;
 

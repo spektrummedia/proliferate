@@ -1,36 +1,40 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
 using Proliferate.SendEmail.Validation;
 using Spk.Common.Helpers.Service;
-using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
-
-[assembly: LambdaSerializer(typeof(JsonSerializer))]
 
 namespace Proliferate.SendEmail
 {
     public class SendEmailService : FunctionHandler
     {
-        private readonly ServiceResult<SendEmailRequest> _result;
+        private readonly AmazonLambdaHandler _lambdaHandler;
+        private readonly string _validateEmailFunctionName;
 
         public SendEmailService()
         {
-            _result = new ServiceResult<SendEmailRequest>();
+            _validateEmailFunctionName = $"proliferate-{Stage}-validate-email";
+            _lambdaHandler = new AmazonLambdaHandler();
         }
 
-        public Response Execute(Request payload, ILambdaContext context)
+        public async Task<Response> Execute(Request payload, ILambdaContext context)
         {
+            context.Logger.Log($"BLEH!!");
+
+            var result = new ServiceResult<string>();
             SendEmailRequest request = null;
 
             try
             {
                 request = JsonConvert.DeserializeObject<SendEmailRequest>(payload.Body);
+                context.Logger.Log($"Send email to {string.Join(";", request.To)}");
             }
             catch (Exception e)
             {
-                _result.AddError(e.Message);
-                return new Response(_result);
+                result.AddError(e.Message);
+                return new Response(result);
             }
 
             var errors = SendEmailRequestValidationContext.Validate(request);
@@ -38,13 +42,25 @@ namespace Proliferate.SendEmail
             {
                 foreach (var error in errors)
                 {
-                    _result.AddError($"{error.Key}: {error.Value}");
+                    result.AddError($"{error.Key}: {error.Value}");
                 }
 
-                return new Response(_result);
+                return new Response(result);
             }
 
-            return new Response(_result);
+            try
+            {
+                context.Logger.Log($"Sending request to {_validateEmailFunctionName}");
+                var validateEmailResult = await _lambdaHandler.TriggerLambdaFunction(_validateEmailFunctionName);
+                result.SetData(validateEmailResult);
+            }
+            catch (Exception exception)
+            {
+                result.AddError(exception.Message);
+            }
+
+
+            return new Response(result);
         }
     }
 }

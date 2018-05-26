@@ -4,16 +4,16 @@ using Amazon.Lambda.Core;
 using Amazon.Lambda.Serialization.Json;
 using Spk.Common.Helpers.Service;
 
-namespace Proliferate
+namespace Proliferate.ValidateEmail
 {
-    public class ValidateEmail : FunctionHandler
+    public class ValidateEmailService : FunctionHandler
     {
-        private readonly string _apiKeyFunctionName;
+        private readonly string _validateApiKeyFunctionName;
         private readonly AmazonLambdaHandler _lambdaHandler;
 
-        public ValidateEmail()
+        public ValidateEmailService()
         {
-            _apiKeyFunctionName = $"proliferate-{Stage}-validate-api-key";
+            _validateApiKeyFunctionName = $"proliferate-{Stage}-validate-api-key";
             _lambdaHandler = new AmazonLambdaHandler();
         }
 
@@ -26,7 +26,7 @@ namespace Proliferate
                 result.SetData(new
                 {
                     Stage,
-                    FunctionResponse = await _lambdaHandler.Bleh(_apiKeyFunctionName)
+                    FunctionResponse = await _lambdaHandler.TriggerLambdaFunction(_validateApiKeyFunctionName)
                 });
             }
             catch (Exception exception)
