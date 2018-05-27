@@ -8,6 +8,7 @@ provider:
   environment: 
     stage: ${self:provider.stage}
     email_table: ${self:service}-${opt:stage, self:provider.stage}-emails
+    apiKeys_table: ${self:service}-${opt:stage, self:provider.stage}-api-keys
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -40,29 +41,43 @@ resources:
         StreamSpecification:
           StreamViewType: NEW_IMAGE
         TableName: ${self:provider.environment.email_table}
+    ApiKeysDynamoDbTable: 
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: api_key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: api_key
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.apiKeys_table}
 
 package:
   artifact: bin/release/netcoreapp2.0/deploy-package.zip
 
 functions:
   send-email:
-    handler: Proliferate::Proliferate.SendEmail.SendEmailService::Execute
+    handler: Proliferate::Proliferate.Services.SendEmail.SendEmailService::Execute
     events:
       - http:
           path: send-email
           method: post
 
   validate-email:
-    handler: Proliferate::Proliferate.ValidateEmail.ValidateEmailService::Execute
+    handler: Proliferate::Proliferate.Services.ValidateEmail.ValidateEmailService::Execute
 
   validate-api-key:
-    handler: Proliferate::Proliferate.ValidateApiKey.ValideApiKeyService::Execute
+    handler: Proliferate::Proliferate.Services.ValidateApiKey.ValidateApiKeyService::Execute
 
   build-markup:
-    handler: Proliferate::Proliferate.BuildMarkup.BuildMarkupService::Execute
+    handler: Proliferate::Proliferate.Services.BuildMarkup.BuildMarkupService::Execute
   
   email-trigger:
-    handler: Proliferate::Proliferate.EmailTrigger.EmailTriggerService::Execute
+    handler: Proliferate::Proliferate.Services.EmailTrigger.EmailTriggerService::Execute
     events:
       - stream:
           type: dynamodb

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Spk.Common.Helpers.Service;
 
 namespace Proliferate
 {
@@ -22,6 +23,16 @@ namespace Proliferate
         public Response(object body)
         {
             Body = JsonConvert.SerializeObject(body);
+        }
+
+        public Response(ServiceResult result)
+        {
+            if (!result.Success)
+            {
+                StatusCode = 400;
+            }
+
+            Body = JsonConvert.SerializeObject(result);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Spk.Common.Helpers.String;
 
-namespace Proliferate.SendEmail.Validation
+namespace Proliferate.Services.SendEmail.Validation
 {
     public class ApiKeyApprover : SendEmailRequestBaseApprover
     {

@@ -3,15 +3,14 @@ using System.Threading.Tasks;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
 using Newtonsoft.Json;
+using Spk.Common.Helpers.Service;
 
 namespace Proliferate
 {
     public class AmazonLambdaHandler
     {
-        public async Task<string> TriggerLambdaFunction<T>(string apiFunctionName, T payload)
+        public async Task<ServiceResult> TriggerLambdaFunction<T>(string apiFunctionName, T payload)
         {
-            var lambdaResult = string.Empty;
-
             using (var client = new AmazonLambdaClient())
             {
                 var response = await client.InvokeAsync(new InvokeRequest
@@ -20,14 +19,11 @@ namespace Proliferate
                     Payload = JsonConvert.SerializeObject(payload)
                 });
 
-
                 using (var sr = new StreamReader(response.Payload))
                 {
-                    lambdaResult = sr.ReadToEnd();
+                    return JsonConvert.DeserializeObject<ServiceResult>(sr.ReadToEnd());
                 }
             }
-
-            return lambdaResult;
         }
     }
 }

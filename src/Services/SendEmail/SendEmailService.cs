@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
+using MoreLinq;
 using Newtonsoft.Json;
-using Proliferate.SendEmail.Validation;
+using Proliferate.Services.SendEmail.Validation;
 using Spk.Common.Helpers.Service;
 
-namespace Proliferate.SendEmail
+namespace Proliferate.Services.SendEmail
 {
     public class SendEmailService : FunctionHandler
     {
@@ -38,19 +39,17 @@ namespace Proliferate.SendEmail
             var errors = SendEmailRequestValidationContext.Validate(request);
             if (errors.Any())
             {
-                foreach (var error in errors)
-                {
-                    result.AddError($"{error.Key}: {error.Value}");
-                }
-
+                errors.ForEach(error => result.AddError($"{error.Key}: {error.Value}"));
                 return new Response(result);
             }
 
             try
             {
-                context.Logger.Log($"Sending request to {_validateEmailFunctionName}");
-                var validateEmailResult = await _lambdaHandler.TriggerLambdaFunction(_validateEmailFunctionName, request);
-                result.SetData(validateEmailResult);
+                var serviceResult = await _lambdaHandler.TriggerLambdaFunction(_validateEmailFunctionName, request);
+                if (!serviceResult.Success)
+                {
+                    serviceResult.Errors.ForEach(error => result.AddError(error));
+                }
             }
             catch (Exception exception)
             {

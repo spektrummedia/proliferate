@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Proliferate.SendEmail.Validation
+namespace Proliferate.Services.SendEmail.Validation
 {
     public static class SendEmailRequestValidationContext
     {

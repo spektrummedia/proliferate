@@ -5,21 +5,25 @@ using Amazon.Lambda.Core;
 using Amazon.SimpleEmail;
 using Amazon.SimpleEmail.Model;
 using Proliferate.Utilities;
+using Spk.Common.Helpers.Service;
 
-namespace Proliferate.EmailTrigger
+namespace Proliferate.Services.EmailTrigger
 {
     public class EmailTriggerService : FunctionHandler
     {
-        public async Task<Response> Execute(NewDynamoStreamEntity request, ILambdaContext context)
+        public async Task<ServiceResult> Execute(NewDynamoStreamEntity request, ILambdaContext context)
         {
+            var result = new ServiceResult();
             if (request == null || request.Records == null)
             {
-                return new Response("invalid request");
+                result.AddError("invalid request");
+                return result;
             }
 
             if (!request.Records.Any() || request.Records.All(x => x.Dynamodb?.NewImage == null))
             {
-                return new Response("no records");
+                result.AddError("no records");
+                return result;
             }
 
             var records = request.Records
@@ -69,7 +73,7 @@ namespace Proliferate.EmailTrigger
                 }
             }
 
-            return new Response();
+            return new ServiceResult();
         }
     }
 }

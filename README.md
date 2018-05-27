@@ -47,6 +47,13 @@ This service is used to validate email.
 
 This service is used to validate API keys. Unallowed API keys will not be able to send email from `proliferate`.
 
+To create a new access key, you must go to the `proliferate-{stage}-api-keys` table and add a name and a key in whatever format you like. This key will then be used throughout the application. We strongly suggest something that cannot be guessed easily. Example:
+
+api_key - `8f0a4306-2e14-420c-bbee-fb2fc1d36777`
+client_name - `proliferate-client`
+
+
+
 ## Documentation
 
 #### Deployment
