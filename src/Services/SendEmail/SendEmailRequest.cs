@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Amazon.DynamoDBv2.Model;
 using Newtonsoft.Json;
 
-namespace Proliferate.SendEmail
+namespace Proliferate.Services.SendEmail
 {
     public class EmailContent
     {
