@@ -8,10 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SendEmail\SendEmailServiceTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.1.0" />
-    <PackageReference Include="AutoFixture" Version="4.3.0" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.3.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.2.0" />
+    <PackageReference Include="AutoFixture" Version="4.4.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.4.0" />
     <PackageReference Include="AWSSDK.Lambda" Version="3.3.13.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="Shouldly" Version="3.0.0" />
@@ -26,6 +30,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\Proliferate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SendEmail\" />
   </ItemGroup>
 
 </Project>

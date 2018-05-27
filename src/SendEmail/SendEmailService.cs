@@ -21,8 +21,6 @@ namespace Proliferate.SendEmail
 
         public async Task<Response> Execute(Request payload, ILambdaContext context)
         {
-            context.Logger.Log($"BLEH!!");
-
             var result = new ServiceResult<string>();
             SendEmailRequest request = null;
 
@@ -51,7 +49,7 @@ namespace Proliferate.SendEmail
             try
             {
                 context.Logger.Log($"Sending request to {_validateEmailFunctionName}");
-                var validateEmailResult = await _lambdaHandler.TriggerLambdaFunction(_validateEmailFunctionName);
+                var validateEmailResult = await _lambdaHandler.TriggerLambdaFunction(_validateEmailFunctionName, request);
                 result.SetData(validateEmailResult);
             }
             catch (Exception exception)

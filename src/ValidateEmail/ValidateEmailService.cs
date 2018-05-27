@@ -2,6 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.Serialization.Json;
+using Newtonsoft.Json;
+using Proliferate.SendEmail;
 using Spk.Common.Helpers.Service;
 
 namespace Proliferate.ValidateEmail
@@ -17,8 +19,9 @@ namespace Proliferate.ValidateEmail
             _lambdaHandler = new AmazonLambdaHandler();
         }
 
-        public async Task<Response> Execute(Request request, ILambdaContext context)
+        public async Task<Response> Execute(SendEmailRequest request, ILambdaContext context)
         {
+            context.Logger.Log($"KEY: {request.ApiKey}");
             var result = new ServiceResult<object>();
 
             try
@@ -26,7 +29,7 @@ namespace Proliferate.ValidateEmail
                 result.SetData(new
                 {
                     Stage,
-                    FunctionResponse = await _lambdaHandler.TriggerLambdaFunction(_validateApiKeyFunctionName)
+                    FunctionResponse = await _lambdaHandler.TriggerLambdaFunction(_validateApiKeyFunctionName, request)
                 });
             }
             catch (Exception exception)

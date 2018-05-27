@@ -18,6 +18,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+        - dynamodb:ListStreams
+        - ses:SendEmail
       Resource: "*"
 
 resources:
@@ -35,6 +37,8 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
         TableName: ${self:provider.environment.email_table}
 
 package:
@@ -56,3 +60,13 @@ functions:
 
   build-markup:
     handler: Proliferate::Proliferate.BuildMarkup.BuildMarkupService::Execute
+  
+  email-trigger:
+    handler: Proliferate::Proliferate.EmailTrigger.EmailTriggerService::Execute
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt:
+              - EmailsDynamoDbTable
+              - StreamArn

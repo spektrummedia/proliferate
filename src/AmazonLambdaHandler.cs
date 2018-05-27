@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using Amazon.Lambda;
 using Amazon.Lambda.Model;
+using Newtonsoft.Json;
 
 namespace Proliferate
 {
     public class AmazonLambdaHandler
     {
-        public async Task<string> TriggerLambdaFunction(string apiFunctionName)
+        public async Task<string> TriggerLambdaFunction<T>(string apiFunctionName, T payload)
         {
             var lambdaResult = string.Empty;
 
@@ -15,7 +16,8 @@ namespace Proliferate
             {
                 var response = await client.InvokeAsync(new InvokeRequest
                 {
-                    FunctionName = apiFunctionName
+                    FunctionName = apiFunctionName,
+                    Payload = JsonConvert.SerializeObject(payload)
                 });
 
 

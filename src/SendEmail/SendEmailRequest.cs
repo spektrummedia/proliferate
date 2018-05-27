@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Amazon.DynamoDBv2.Model;
 using Newtonsoft.Json;
 
 namespace Proliferate.SendEmail
@@ -11,6 +13,9 @@ namespace Proliferate.SendEmail
 
     public class SendEmailRequest
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
         [JsonProperty("api_key")]
         public string ApiKey { get; set; }
 
