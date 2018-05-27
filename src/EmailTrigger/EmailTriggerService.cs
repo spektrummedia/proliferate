@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.SimpleEmail;
 using Amazon.SimpleEmail.Model;
+using Proliferate.Utilities;
 
 namespace Proliferate.EmailTrigger
 {
@@ -45,12 +46,12 @@ namespace Proliferate.EmailTrigger
                             Html = new Content
                             {
                                 Charset = "UTF-8",
-                                Data = record.Dynamodb.NewImage.HtmlContent.S
+                                Data = DataCompressor.Decompress(record.Dynamodb.NewImage.HtmlContent.S)
                             },
                             Text = new Content
                             {
                                 Charset = "UTF-8",
-                                Data = record.Dynamodb.NewImage.HtmlText.S
+                                Data = DataCompressor.Decompress(record.Dynamodb.NewImage.TextContent.S)
                             }
                         }
                     };

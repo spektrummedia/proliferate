@@ -72,7 +72,7 @@ namespace Proliferate.EmailTrigger
         [JsonProperty("cc")]
         public Bcc Cc { get; set; }
 
-        [JsonProperty("html_content")]
+        [JsonProperty("content_html")]
         public Id HtmlContent { get; set; }
 
         [JsonProperty("bcc")]
@@ -87,8 +87,8 @@ namespace Proliferate.EmailTrigger
         [JsonProperty("subject")]
         public Id Subject { get; set; }
 
-        [JsonProperty("html_text")]
-        public Id HtmlText { get; set; }
+        [JsonProperty("content_text")]
+        public Id TextContent { get; set; }
 
         [JsonProperty("id")]
         public Id Id { get; set; }

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
 using Proliferate.SendEmail;
+using Proliferate.Utilities;
 
 namespace Proliferate.BuildMarkup
 {
@@ -23,6 +27,10 @@ namespace Proliferate.BuildMarkup
         public async Task<Response> Execute(SendEmailRequest request, ILambdaContext context)
         {
             var dbClient = new AmazonDynamoDBClient();
+
+            request.Content.Html = DataCompressor.Compress(request.Content.Html);
+            request.Content.Text = DataCompressor.Compress(request.Content.Text);
+
             var response = await dbClient.PutItemAsync(_emailsTableName, new Dictionary<string, AttributeValue>
             {
                 {"id", new AttributeValue(Guid.NewGuid().ToString())},
@@ -32,8 +40,8 @@ namespace Proliferate.BuildMarkup
                 {"to", new AttributeValue(request.To)},
                 {"cc", new AttributeValue(request.CC)},
                 {"bcc", new AttributeValue(request.BCC)},
-                {"html_content", new AttributeValue(request.Content.Html)},
-                {"html_text", new AttributeValue(request.Content.Text)}
+                {"content_html", new AttributeValue(request.Content.Html)},
+                {"content_text", new AttributeValue(request.Content.Text)}
             });
             return new Response(response);
         }
