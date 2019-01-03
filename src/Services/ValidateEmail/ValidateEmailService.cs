@@ -23,8 +23,7 @@ namespace Proliferate.Services.ValidateEmail
 
             try
             {
-                var lambdaResult = await _lambdaHandler.TriggerLambdaFunction(_validateApiKeyFunctionName, request);
-                return lambdaResult;
+                return await _lambdaHandler.TriggerLambdaFunction(_validateApiKeyFunctionName, request);
             }
             catch (Exception exception)
             {
